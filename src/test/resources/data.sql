@@ -1,0 +1,2 @@
+INSERT INTO ADDRESS(id,addressLine1,addressLine2,city,state,zipCode) VALUES('f8239c23-b72b-11ee-bd5c-ec63d778df8d','12103 Cypress Ct','','Alpharetta','GA','30005');
+INSERT INTO CUSTOMER(id,dateOfBirth,firstName,lastName,phone,address_id) VALUES('2fed2045-b72c-11ee-bd5c-ec63d778df8d','1991-07-23','Rajesh','Takkellapati','+1(770)524-0496','f8239c23-b72b-11ee-bd5c-ec63d778df8d');

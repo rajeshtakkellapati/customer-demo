@@ -4,21 +4,13 @@ import com.learning.java.model.Address;
 import com.learning.java.model.Customer;
 import com.learning.java.service.CustomerService;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.internal.verification.VerificationModeFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -26,11 +18,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static org.mockito.BDDMockito.given;
 import static org.hamcrest.Matchers.hasSize;
-
-@ExtendWith(SpringExtension.class)
-@WebMvcTest(value = CustomerController.class, excludeAutoConfiguration = SecurityAutoConfiguration.class)
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+@AutoConfigureMockMvc
 class CustomerControllerTest {
     @Autowired
     private MockMvc mvc;
@@ -41,7 +37,7 @@ class CustomerControllerTest {
     @Test
     void getAllCustomersTest() throws Exception {
         Customer customer = Customer.builder()
-                .id(UUID.randomUUID())
+                .id(UUID.randomUUID().toString())
                 .firstName("Rajesh")
                 .lastName("Takkellapati")
                 .dateOfBirth(LocalDate.of(1991, Month.JULY, 23))
